@@ -587,22 +587,17 @@ user_caption_preferences = {}
 # Rename and caption preference functions
 
 async def set_rename_command(user_id, custom_rename_tag):
-    user_rename_preferences[str(user_id)] = custom_rename_tag
+    user_rename_preferences[str(user_id)] = custom_rename_tag.strip()
 
-def get_user_rename_preference(user_id, original_name=""):
-    rename_tag = user_rename_preferences.get(str(user_id), '')
-    if rename_tag:
-        return f"{rename_tag} {original_name}"
-    return original_name
+def get_user_rename_preference(user_id):
+    return user_rename_preferences.get(str(user_id), '')
 
 async def set_caption_command(user_id, custom_caption):
-    user_caption_preferences[str(user_id)] = custom_caption
+    user_caption_preferences[str(user_id)] = custom_caption.strip()
 
 def get_user_caption_preference(user_id):
     return user_caption_preferences.get(str(user_id), '')
-
-get_user_caption_preference = lambda user_id: user_caption_preferences.get(str(user_id), '')
-
+    
 # Initialize the dictionary to store user sessions
 
 sessions = {}
